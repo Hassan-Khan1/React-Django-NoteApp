@@ -9,24 +9,15 @@ const customHistory = createBrowserHistory();
 
 function App() {
   return (
-    // <div className="App">
-    //  <Header />
-    //  <NotesListPage />
-
-    // </div>
-
-  <Router history={customHistory}>
-
-    
-    <div className="container dark">
-    <div className="app">
-    <Header />
-    <Route exact path='/' component={NotesListPage} />   
-    <Route exact path='/notes/:id' component={NotePage} />   
-    </div>
-    </div>
-  </Router>
+    <Router history={customHistory}>
+      <div className="container dark">
+        <div className="app">
+          <Header />
+          <Route exact path='/' component={NotesListPage} />
+          <Route exact path='/notes/:id' component={NotePage} />
+        </div>
+      </div>
+    </Router>
   );
 }
-
 export default App;
