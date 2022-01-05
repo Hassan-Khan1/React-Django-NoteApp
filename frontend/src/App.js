@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
-import NotesListPage from './pages/NotesListPage';
+// import NotesListPage from './pages/NoteList/NotesListPage';
 import { Route, Switch, Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
-import NotePage from './pages/NotePage';
+import NotePage from './pages/Note/NotePage';
+// import NotesListPage from './pages/NoteList';
+import NotesListPage from './pages/NoteList/NoteListPage';
+
 const customHistory = createBrowserHistory();
 
 function App() {

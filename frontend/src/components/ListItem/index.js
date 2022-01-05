@@ -1,8 +1,6 @@
 import React from 'react'
-import NotesListPage from '../pages/NotesListPage'
+import NotesListPage from '../../pages/NoteList/NoteListPage'
 import { Link } from 'react-router-dom'
-
-
 
 let getTime = (note) => {
 	return new Date(note.updated).toLocaleDateString()
@@ -14,7 +12,6 @@ let getTitle = (note) => {
 	}
 	return title
 }
-
 
 let getContent = (note)  => {
 	let title = getTitle(note)
