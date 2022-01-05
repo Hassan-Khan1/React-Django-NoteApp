@@ -4,8 +4,7 @@ import Header from './components/Header';
 import NotesListPage from './pages/NotesListPage';
 import { Route, Switch, Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
-import NotePage from './components/NotePage';
-
+import NotePage from './pages/NotePage';
 const customHistory = createBrowserHistory();
 
 function App() {

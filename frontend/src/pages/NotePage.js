@@ -7,9 +7,10 @@ const NotePage = ({ match, history }) => {
     console.log('noteId.... ', noteId)
     useEffect(() => {
         getNote()
-    }, [noteId])
+    },[noteId])
 
     let getNote = async () => {
+        if (noteId === 'new') return
         let response = await fetch('/api/notes/' + noteId);
         let data = await response.json()
         console.log("Data....", data)
@@ -19,6 +20,16 @@ const NotePage = ({ match, history }) => {
     }
 
 
+
+    let createNote = async () => {
+        fetch('/api/notes/create/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(note)
+        })
+    }
 
     let updateNote = async () => {
         fetch('/api/notes/' + noteId + '/update/', {
@@ -42,7 +53,14 @@ const NotePage = ({ match, history }) => {
     }
 
 
-    let handleSubmit = (value) => {
+    let handleSubmit = () => {
+        if (noteId !== 'new' &&  note.body === ''){
+            deleteNote()
+        }else if (noteId !== 'new'){
+            updateNote()
+        }else if (noteId == 'new' && note !== null){
+            createNote()
+        }
         updateNote()
         history.push('/')
     }
@@ -52,13 +70,18 @@ const NotePage = ({ match, history }) => {
             <div className='note-header'>
                 {/* <button onClick={handleSubmit}>Done</button> */}
                 <h3>
-                <ArrowLeft onClick={handleSubmit} />
+                    <ArrowLeft onClick={handleSubmit} />
                 </h3>
+                {noteId !== 'new' ? (
                     <button onClick={deleteNote}>DELETE</button>
+                ) : (
+                    <button onClick={handleSubmit}>Done</button>
+                )}
 
-                </div>
+            </div>
             <textarea onChange={(e) => { setNote(({ ...note, 'body': e.target.value })) }} defaultValue={note?.body}></textarea>
         </div>
+
     )
 }
 
