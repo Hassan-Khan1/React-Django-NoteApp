@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Input } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { useParams } from "react-router-dom";
 
 //  components
@@ -10,15 +10,15 @@ import API from '../../services/API'
 
 const { TextArea } = Input;
 
-const NotePage = ({  history }) => {
+const NotePage = ({ history }) => {
   // const params = useParams();
   // const id = params.id;
   const { id } = useParams();
-  const [ data, setData ] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     getNote();
-  }, [ id ])
+  }, [id])
 
   const getNote = async () => {
     if (id === 'new') return
@@ -29,7 +29,7 @@ const NotePage = ({  history }) => {
     await API.post('/api/notes/create/', data);
   }
   const putNote = async () => {
-    await API.put(`/api/notes/${id}/update/`,data);
+    await API.put(`/api/notes/${id}/update/`, data);
     // await API.put('/api/notes/' + id + '/update/', data);
   }
   const deleteNote = async () => {
@@ -50,17 +50,41 @@ const NotePage = ({  history }) => {
     history.push('/');
   }
 
+  // const onSubmit = (values) => {
+  //   setData(values);
+  //   history.push('/');
+  // };
+  console.log('data....',data)
+
   return (
     <div className='note'>
+
       <div className='note-header'>
-        <h3><ArrowLeft onClick={ handleSubmit}  /></h3>
-        {id !== 'new' ? (
-          <button onClick={ deleteNote }>DELETE</button>
-        ) : (
-          <button onClick={ handleSubmit } >Done</button>
-        )}
+       
+          <h3><ArrowLeft onClick={handleSubmit} /></h3>
+          {id !== 'new' ? (
+            <button onClick={deleteNote}>DELETE</button>
+          ) : (
+            <button onClick={handleSubmit} >Done</button>
+          )}
+      
       </div>
-      <textarea onChange={(e) => { setData(({  ...data, 'body': e.target.value })) }} defaultValue={ data?.body}></textarea>
+      <label>Form Text Page</label>
+
+      <Form onFinish={ handleSubmit } initialValues={{ username:[data?.body]  }} >
+        <Form.Item 
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
+        <Input.TextArea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }}/>
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+      </Form>
+      <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea>
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
     </div>
   )
