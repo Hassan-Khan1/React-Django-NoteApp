@@ -4,10 +4,10 @@ import { Route, Switch, Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
 // Note Specific Id Data
-import NotePage from './pages/Note/NotePage';
+import NotePage from './pages/FormIdData/index.js';
 
 // Note List Data
-import NotesListPage from './pages/NoteList/NoteListPage';
+import NotesListPage from './pages/FormList';
 
 const customHistory = createBrowserHistory();
 

@@ -6,5 +6,5 @@ const Header = () => {
 			<h1>Note List</h1>
 		</div>
 	)
-}
-export default Header
+};
+export default Header;
