@@ -13,7 +13,6 @@ class API {
       let data = await response.json();
   return data
   }
-
   post = async (path,data) => {
     await fetch(path, {
       method: "POST",
@@ -21,7 +20,6 @@ class API {
       body: JSON.stringify(data)
     })
   }
-
   put = async (path,data) => {
     await fetch(path, {
       method: "PUT",
@@ -29,7 +27,6 @@ class API {
       body: JSON.stringify(data)
     })
   }
-
   delete = async (path,data) => {
     await fetch(path, {
       method: "DELETE",
