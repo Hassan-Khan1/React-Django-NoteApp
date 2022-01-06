@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react'
 import ListItem from '../../components/ListItem/index.js'
 import AddButton from '../../components/AddButton'
 
+//  DRF Get API 
+import API from '../../services/API.js'
+
 const NotesListPage = () => {
 	let [notes, setNotes] = useState([])
 	useEffect(() => {
-		getNotes()
+		const getdata = async () => {
+			setNotes(await API.getNoteList('/api/notes/'));
+		}
+		getdata();
 	}, [])
-	// async  or Promise
-	let getNotes = async () => {
-		let respone = await fetch('/api/notes/')
-		let data = await respone.json()
-		console.log("Data : ", data)
-		setNotes(data)
-	}
-	
+
 	return (
 		<div className='notes'>
 			<div className='notes-header'>

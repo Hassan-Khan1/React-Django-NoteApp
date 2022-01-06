@@ -1,50 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
 
+//  DRF API Calls
+import API from '../../services/API'
+
 const NotePage = ({ match, history }) => {
 
   let noteId = match.params.id
   let [note, setNote] = useState(null)
-  console.log('noteId.... ', noteId)
+
   useEffect(() => {
     getNote()
   }, [noteId])
 
   let getNote = async () => {
     if (noteId === 'new') return
-    let response = await fetch('/api/notes/' + noteId);
-    let data = await response.json()
-    console.log("Data....", data)
-    console.log("response....", response)
-    setNote(data)
+    setNote(await API.getNote('/api/notes/' + noteId));
   }
+
   let createNote = async () => {
-    fetch('/api/notes/create/', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(note)
-    })
+    await API.createNoteApi('/api/notes/create/', note)
   }
 
   let updateNote = async () => {
-    fetch('/api/notes/' + noteId + '/update/', {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(note)
-    })
+    await API.updateNoteApi('/api/notes/' + noteId + '/update/', note)
   }
 
   let deleteNote = async () => {
-    fetch('/api/notes/' + noteId + '/delete/', {
-      method: "DELETE",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
+    await API.deleteNoteApi('/api/notes/' + noteId + '/delete/')
     history.push('/')
   }
 
@@ -63,7 +46,6 @@ const NotePage = ({ match, history }) => {
   return (
     <div className='note'>
       <div className='note-header'>
-        {/* <button onClick={handleSubmit}>Done</button> */}
         <h3><ArrowLeft onClick={handleSubmit} /></h3>
         {noteId !== 'new' ? (
           <button onClick={deleteNote}>DELETE</button>

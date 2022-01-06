@@ -1,5 +1,4 @@
 import React from 'react'
-import NotesListPage from '../../pages/NoteList/NoteListPage'
 import { Link } from 'react-router-dom'
 
 let getTime = (note) => {
