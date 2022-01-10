@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header';
-import { Route, Switch, Router } from 'react-router-dom';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
 // Note Specific Id Data
