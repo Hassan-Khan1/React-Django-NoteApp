@@ -4,9 +4,7 @@ import { useParams } from "react-router-dom";
 
 //  components
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
-import { useSelector, useDispatch } from 'react-redux'
-import { getnoteid } from '../../actions';
-import { postnote } from '../../actions';
+
 //   Services 
 import API from '../../services/API'
 
@@ -16,28 +14,16 @@ const NotePage = ({ history }) => {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
-  const notes = useSelector(state => state.requestRe.notes)
-	const dispatch = useDispatch();
-  
-  useEffect(() => { getNote(); }, [id])
+  useEffect(() => {
+    getNote();
+  }, [id])
 
   const getNote = async () => {
     if (id === 'new') return
-    const res = await API.get(`/api/notes/${id}`) ;
-    dispatch(getnoteid(res))
-    // setData(await API.get(`/api/notes/${id}`));
+    setData(await API.get(`/api/notes/${id}`));
   }
-
-	// const getData = async () => {
-	// 	const res = await API.get('/api/notes/')
-	// 	dispatch(getlist(res))
-	// }
-
-
   const postNote = async () => {
-    const res = await  API.post('/api/notes/create/', data) ;
-    // await API.post('/api/notes/create/', data);
-    dispatch(postnote(res))
+    await API.post('/api/notes/create/', data);
   }
   const putNote = async () => {
     await API.put(`/api/notes/${id}/update/`, data);
@@ -73,7 +59,7 @@ const NotePage = ({ history }) => {
       </div>
       <label>Form Text Page</label>
 
-      {/* <Form onFinish={handleSubmit} initialValues={{ name: data?.body }} >
+      <Form onFinish={handleSubmit} initialValues={{ name: data?.body }} >
         <Form.Item
           name="name"
           rules={[{ required: true, message: 'Please input your username!' }]} >
@@ -84,13 +70,10 @@ const NotePage = ({ history }) => {
             Submit
           </Button>
         </Form.Item>
-      </Form> */}
-      {/* <textarea  defaultValue={data?.body}></textarea> */}
+      </Form>
       <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea>
-
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
     </div>
   )
 };
 export default NotePage;
-

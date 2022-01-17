@@ -4,9 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const getTitle = (note) => {
-	if(note.body === null) 
-	return 
-	const title = note?.body?.split('\n')[0];
+	const title = note.body.split('\n')[0];
 	if (title.length > 45) {
 		return title.slice(0, 45);
 	}
@@ -16,17 +14,16 @@ const getTitle = (note) => {
 const getContent = (note) => {
 	const title = getTitle(note)
 	// const is not working // content is constant
-	let content = note?.body?.replaceAll('\n', '');
+	let content = note.body.replaceAll('\n', '');
 	content = content.replaceAll(title, '');
-	if (content?.length > 45) {
-		return content?.slice(0, 45) + '...';
+	if (content.length > 45) {
+		return content.slice(0, 45) + '...';
 	} else {
 		return content;
 	}
 }
 const ListItem = ({ note }) => {
 	return (
-
 		<Link to={'/notes/' + note.id}>
 			<div className='notes-list-item'>
 				<h3>{getTitle(note)}</h3>
