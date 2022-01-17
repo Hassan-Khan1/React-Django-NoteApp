@@ -59,7 +59,7 @@ const NotePage = ({ history }) => {
       </div>
       <label>Form Text Page</label>
 
-      <Form onFinish={handleSubmit} initialValues={{ name: data?.body }} >
+      {/* <Form onFinish={handleSubmit} initialValues={{ name: data?.body }} >
         <Form.Item
           name="name"
           rules={[{ required: true, message: 'Please input your username!' }]} >
@@ -70,7 +70,7 @@ const NotePage = ({ history }) => {
             Submit
           </Button>
         </Form.Item>
-      </Form>
+      </Form> */}
       <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea>
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
     </div>
