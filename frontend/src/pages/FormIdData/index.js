@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { getnoteid } from '../../actions';
+import { postnote } from '../../actions';
 //   Services 
 import API from '../../services/API'
 
@@ -13,9 +14,9 @@ const { TextArea } = Input;
 
 const NotePage = ({ history }) => {
   const { id } = useParams();
-  // const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
-  const data = useSelector(state => state.requestRe.notes)
+  const notes = useSelector(state => state.requestRe.notes)
 	const dispatch = useDispatch();
   
   useEffect(() => { getNote(); }, [id])
@@ -34,7 +35,9 @@ const NotePage = ({ history }) => {
 
 
   const postNote = async () => {
-    await API.post('/api/notes/create/', data);
+    const res = await  API.post('/api/notes/create/', data) ;
+    // await API.post('/api/notes/create/', data);
+    dispatch(postnote(res))
   }
   const putNote = async () => {
     await API.put(`/api/notes/${id}/update/`, data);
@@ -82,8 +85,8 @@ const NotePage = ({ history }) => {
           </Button>
         </Form.Item>
       </Form> */}
-      <textarea  defaultValue={data?.body}></textarea>
-      {/* <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea> */}
+      {/* <textarea  defaultValue={data?.body}></textarea> */}
+      <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea>
 
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
     </div>

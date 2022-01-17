@@ -13,5 +13,13 @@ export const getnoteid = (data) => {
   }
 }
 
+export const postnote = (data) => {
+  return {
+    type: 'POST_DATA',
+    payload: data
+  }
+}
+
+
 
 
