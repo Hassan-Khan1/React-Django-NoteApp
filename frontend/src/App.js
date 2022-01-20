@@ -14,6 +14,12 @@ const customHistory = createBrowserHistory();
 
 function App() {
   console.log(window.location.pathname);
+
+  // const userLogin = (token) =>{
+  //   console.log('token...',token) 
+  // } 
+  // userLogin= {userLogin}
+
   return (
     <Router history={customHistory}>
       <div className={`container dark ${window.location.pathname === '/login' ? 'login-view' : ''}`}>
@@ -22,7 +28,7 @@ function App() {
           {/* <Login /> */}
           <Route exact path='/' component={NotesListPage} />
           <Route exact path='/notes/:id' component={NotePage} />
-          <Route exact path='/login' component={Login}/>
+          <Route exact path='/login' component={Login }  />
         </div>
       </div>
     </Router>

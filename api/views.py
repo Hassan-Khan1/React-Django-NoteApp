@@ -59,49 +59,50 @@ def getRoutes(request):
 # /notes/<id> PUT
 # /notes/<id> DELETE
 
-@api_view(['GET'])
-def getNotes(request):
+# @api_view(['GET'])
+# def getNotes(request):
 
-  notes = Note.objects.all().order_by('-updated')
-  serializer = NoteSerializer(notes,many=True)
-  authentication_classes = [TokenAuthentication, ]
-  permission_classes = [IsAuthenticated, ]
-  return Response(serializer.data,)
+#   notes = Note.objects.all().order_by('-updated')
+#   serializer = NoteSerializer(notes,many=True)
+#   authentication_classes = [TokenAuthentication, ]
+#   permission_classes = [IsAuthenticated, ]
+#   return Response(serializer.data,)
  
-@api_view(['GET'])
-def getNote(request,pk):
+# @api_view(['GET'])
+# def getNote(request,pk):
 
-  notes = Note.objects.get(id=pk)
-  serializer = NoteSerializer(notes,many=False)
-  return Response(serializer.data)
-
-
-@api_view(['POST'])
-def createNote(request):
-  data = request.data
-  note = Note.objects.create(
-      body=data['body']
-  )
-  serializer = NoteSerializer(note, many=False)
-  return Response(serializer.data)
+#   notes = Note.objects.get(id=pk)
+#   serializer = NoteSerializer(notes,many=False)
+#   return Response(serializer.data)
 
 
-@api_view(['PUT'])
-def updateNote(request, pk):
-  data = request.data
-  note = Note.objects.get(id=pk)
-  serializer = NoteSerializer(instance=note, data=data)
-  if serializer.is_valid():
-      serializer.save()
+# @api_view(['POST'])
+# def createNote(request):
+#   data = request.data
+#   note = Note.objects.create(
+#       body=data['body']
+#   )
+#   serializer = NoteSerializer(note, many=False)
+#   return Response(serializer.data)
 
-  return Response(serializer.data)
+
+# @api_view(['PUT'])
+# def updateNote(request, pk):
+#   data = request.data
+#   note = Note.objects.get(id=pk)
+#   serializer = NoteSerializer(instance=note, data=data)
+#   if serializer.is_valid():
+#       serializer.save()
+
+#   return Response(serializer.data)
 
 
-@api_view(['DELETE'])
-def deleteNote(request, pk):
-  note = Note.objects.get(id=pk)
-  note.delete()
-  return Response('Note was deleted!')
+# @api_view(['DELETE'])
+# def deleteNote(request, pk):
+#   note = Note.objects.get(id=pk)
+#   note.delete()
+#   return Response('Note was deleted!')
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -110,3 +111,16 @@ class UserViewSet(viewsets.ModelViewSet):
     # authentication_classes = [TokenAuthentication, ]
     # permission_classes = [IsAuthenticated, ]
 
+
+class NoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    # authentication_classes = [TokenAuthentication, ]
+    # permission_classes = [IsAuthenticated, ]
+
+
+# class BookViewSet(viewsets.ModelViewSet):
+#   queryset = Note.objects.all()
+#   serializer_class = NoteSerializer
+#   # authentication_classes = [TokenAuthentication, ]
+#   # permission_classes = [IsAuthenticated, ]

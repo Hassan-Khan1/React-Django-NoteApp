@@ -31,20 +31,20 @@ const NotePage = ({ history }) => {
     console.log("Notes...", data)
   }
   const postNote = async () => {
-    const res = API.post('/api/notes/create/', data);
+    const res = API.post('/api/notes/', data);
     dispatch(postnote(res))
 
     // await API.post('/api/notes/create/', data);
   }
   const putNote = async () => {
-    const res = API.put(`/api/notes/${id}/update/`, data);
+    const res = API.put(`/api/notes/${id}/`, data);
     dispatch(putnote(res))
 
     // await API.put(`/api/notes/${id}/update/`, data);
     // await API.put('/api/notes/' + id + '/update/', data);
   }
   const deleteNote = async () => {
-    const res = API.delete(`/api/notes/${id}/delete/`);
+    const res = API.delete(`/api/notes/${id}/`);
     dispatch(delnote(res))
     history.push('/');
     // await API.delete(`/api/notes/${id}/delete/`);

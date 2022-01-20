@@ -13,6 +13,7 @@ class API {
       let data = await response.json();
   return data
   }
+  
   post = async (path,data) => {
     await fetch(path, {
       method: "POST",

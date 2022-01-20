@@ -123,6 +123,13 @@ a {
   font-weight: 600;
 }
 
+.notes-login,
+.notes-count {
+  color: var(--color-main);
+  font-size: 20px;
+  font-weight: 200;
+}
+
 .notes-count {
   font-size: 18px;
   color: var(--color-gray);
