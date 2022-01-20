@@ -13,9 +13,7 @@ const { TextArea } = Input;
 const NotePage = ({ history }) => {
   const { id } = useParams();
   // const [data1, setData] = useState(null);
-
   const data = useSelector(state => state.requestRe.notes)
-
   // const { data } = useSelector(state => state.requestRe.find( notes.id ));
   const dispatch = useDispatch();
 
@@ -39,7 +37,6 @@ const NotePage = ({ history }) => {
   const putNote = async () => {
     const res = API.put(`/api/notes/${id}/`, data);
     dispatch(putnote(res))
-
     // await API.put(`/api/notes/${id}/update/`, data);
     // await API.put('/api/notes/' + id + '/update/', data);
   }

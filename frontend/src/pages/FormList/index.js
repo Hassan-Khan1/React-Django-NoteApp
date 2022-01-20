@@ -5,22 +5,28 @@ import ListItem from '../../components/ListItem/index.js'
 import AddButton from '../../components/AddButton'
 //  Api Services
 import API from '../../services/API.js'
-
 import { getlist } from '../../actions/index.js'
 import { useSelector, useDispatch } from 'react-redux'
 
 const NotesListPage = () => {
+	
 	const notes = useSelector(state => state.requestRe.notes)
+	const token = useSelector(state => state.userReducer.loginToken)
 	const dispatch = useDispatch();
+
+	console.log('Token NoteList Page....',token)
 	console.log('notes...12.',notes)
 
 	useEffect(() => { getData() }, []);
 
 	const getData = async () => {
-		const res = await API.get('/api/notes/')
+		const res = await API.get('/api/notes/', token);
+
+		        // Authorization: `Token ${this.props.token}`
+
 		dispatch(getlist(res))
 	}
-
+	
 	return (
 		<div className='notes'>
 			<div className='notes-header'>

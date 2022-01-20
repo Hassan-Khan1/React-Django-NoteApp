@@ -1,11 +1,14 @@
 import React, { useEffect, useState, Component } from 'react'
 //  Link of Specific Note Id
 import { useHistory } from 'react-router-dom';
-
+import { loginToken } from '../../actions/user';
+import { useSelector, useDispatch } from 'react-redux'
 
 const Login = () => {
-  const history = useHistory();
+	const history = useHistory();
 	const [state, setState] = useState({ username: '', password: '' });
+	const dispatch = useDispatch();
+
 	const login = (event) => {
 		fetch('http://127.0.0.1:8000/auth/', {
 			method: 'POST',
@@ -13,15 +16,16 @@ const Login = () => {
 			body: JSON.stringify(state)
 		})
 			.then(data => data.json())
-			
+
 			.then(
 				data => {
-					console.log(data.token)
+					console.log('Token....', data.token)
+					dispatch(loginToken(data.token))
 					// this.props.userLogin(data.token);
 				}
 			)
 			.catch(error => console.error(error))
-			history.push('/');
+		history.push('/');
 	}
 	// http://127.0.0.1:8000/api/router/users/
 	const register = (event) => {
@@ -34,8 +38,6 @@ const Login = () => {
 			.then(
 				data => {
 					console.log(data);
-					
-
 				}
 			)
 			.catch(error => console.error(error))

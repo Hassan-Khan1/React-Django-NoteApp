@@ -6,7 +6,7 @@ const requestReducer = (state = initialState, action) => {
 
     case "GET_DATA":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, notes: action.payload || []
       }
     case "GET_DATA_ID":
       return {
@@ -24,6 +24,12 @@ const requestReducer = (state = initialState, action) => {
       return {
         ...initialState, notes: action.payload
       }
+
+    case "Login_Token":
+      return {
+        ...initialState, notes: action.payload
+      }
+
     default: return state;
   }
 };
