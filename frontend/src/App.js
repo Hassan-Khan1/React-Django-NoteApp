@@ -19,6 +19,7 @@ function App() {
       <div className={`container dark ${window.location.pathname === '/login' ? 'login-view' : ''}`}>
         <div className="app">
           <Header />
+          {/* <Login /> */}
           <Route exact path='/' component={NotesListPage} />
           <Route exact path='/notes/:id' component={NotePage} />
           <Route exact path='/login' component={Login}/>

@@ -64,7 +64,9 @@ def getNotes(request):
 
   notes = Note.objects.all().order_by('-updated')
   serializer = NoteSerializer(notes,many=True)
-  return Response(serializer.data)
+  authentication_classes = [TokenAuthentication, ]
+  permission_classes = [IsAuthenticated, ]
+  return Response(serializer.data,)
  
 @api_view(['GET'])
 def getNote(request,pk):
@@ -105,4 +107,6 @@ def deleteNote(request, pk):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    # authentication_classes = [TokenAuthentication, ]
+    # permission_classes = [IsAuthenticated, ]
 
