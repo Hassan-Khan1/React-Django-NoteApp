@@ -7,41 +7,42 @@ import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
 import API from '../../services/API'
 import { postnote, putnote, delnote, getnoteid } from '../../actions';
 import { useSelector, useDispatch } from 'react-redux'
-
 const { TextArea } = Input;
 
 const NotePage = ({ history }) => {
   const { id } = useParams();
   // const [data1, setData] = useState(null);
   const data = useSelector(state => state.requestRe.getDataId)
+  const token = useSelector(state => state.userReducer.loginToken)
   // const { data } = useSelector(state => state.requestRe.find( notes.id ));
   const dispatch = useDispatch();
 
+  console.log("Token  Reqtuetsss", token)
   useEffect(() => {
     getNote();
   }, [id])
 
   const getNote = async () => {
     if (id === 'new') return
-    const res = await API.get(`/api/notes/${id}`)
+    const res = await API.get(`/api/notes/${id}`, token)
     dispatch(getnoteid(res))
     // setData(await API.get(`/api/notes/${id}`));
     console.log("Notes...", data)
   }
   const postNote = async () => {
-    const res = API.post('/api/notes/', data);
+    const res = API.post('/api/notes/', data, token);
     dispatch(postnote(res))
 
     // await API.post('/api/notes/create/', data);
   }
   const putNote = async () => {
-    const res = API.put(`/api/notes/${id}/`, data);
+    const res = API.put(`/api/notes/${id}/`, data, token);
     dispatch(putnote(res))
     // await API.put(`/api/notes/${id}/update/`, data);
     // await API.put('/api/notes/' + id + '/update/', data);
   }
   const deleteNote = async () => {
-    const res = API.delete(`/api/notes/${id}/`);
+    const res = API.delete(`/api/notes/${id}/`, token);
     dispatch(delnote(res))
     history.push('/');
     // await API.delete(`/api/notes/${id}/delete/`);
@@ -86,7 +87,7 @@ const NotePage = ({ history }) => {
           </Button>
         </Form.Item>
       </Form> */}
-      <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={ data?.body }></textarea>
+      <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={data?.body}></textarea>
       {/* <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={data?.body}></textarea> */}
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
       {/* <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea> */}

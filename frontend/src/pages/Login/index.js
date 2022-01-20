@@ -22,6 +22,14 @@ const Login = () => {
 					console.log('Token....', data.token)
 					dispatch(loginToken(data.token))
 					history.push('/');
+
+					// let token = data.token ;
+					// if (token) {
+					// 	token = true
+					// 	history.push('/');
+					// }else {
+					// 	history.goBack();
+					// }
 					// this.props.userLogin(data.token);
 				}
 			)
