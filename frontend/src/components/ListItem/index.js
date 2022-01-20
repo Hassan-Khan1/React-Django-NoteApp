@@ -3,33 +3,28 @@ import React from 'react'
 //  Link of Specific Note Id
 import { Link } from 'react-router-dom'
 
-const getTitle = (note) => {
-	const title = note.body.split('\n')[0];
-	if (title.length > 45) {
-		return title.slice(0, 45);
-	}
-	return title; // if remove Not Showing Title
+const getTitle = (body) => {
+	const title = body.split('\n')[0];
+	if (title.length > 45) return title.slice(0, 45);
+	return title;
 }
-
-const getContent = (note) => {
-	const title = getTitle(note)
-	// const is not working // content is constant
-	let content = note.body.replaceAll('\n', '');
+const getContent = (body) => {
+	const title = getTitle(body)
+	let content = body.replaceAll('\n', '');
 	content = content.replaceAll(title, '');
-	if (content.length > 45) {
-		return content.slice(0, 45) + '...';
-	} else {
-		return content;
-	}
+	if (content.length > 45) return content.slice(0, 45) + '...';
+	return content;
 }
-const ListItem = ({ note }) => {
+const ListItem = ({ id, body, updated }) => {
+	if (!body) return null;
+
 	return (
-		<Link to={'/notes/' + note.id}>
+		<Link to={'/notes/' + id}>
 			<div className='notes-list-item'>
-				<h3>{getTitle(note)}</h3>
+				<h3>{getTitle(body)}</h3>
 				<p>
-					<span>{new Date(note.updated).toLocaleDateString()}</span>
-					{getContent(note)}
+					<span>{new Date(updated).toLocaleDateString()}</span>
+					{getContent(body)}
 				</p>
 			</div>
 		</Link>

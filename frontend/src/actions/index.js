@@ -1,31 +1,31 @@
-export const getlist = (data) => {
+export const getList = (data) => {
   return {
     type: 'GET_DATA',
     payload: data
   }
 }
-export const getnoteid = (data) => {
+export const getNoteIdAction = (data) => {
   return {
-      type: 'GET_DATA_ID' ,
-      payload : data
+    type: 'GET_DATA_ID',
+    payload: data
   }
 }
-export const postnote = (data) => {
+export const postNoteAction = (data) => {
   return {
-      type: 'POST_DATA_ID' ,
-      payload : data
+    type: 'POST_DATA_ID',
+    payload: data
   }
 }
-export const putnote = (data) => {
+export const putNoteAction = (data) => {
   return {
-      type: 'PUT_DATA_ID' ,
-      payload : data
+    type: 'PUT_DATA_ID',
+    payload: data
   }
 }
-export const delnote = (data) => {
+export const delNoteAction = (data) => {
   return {
-      type: 'DEL_DATA_ID' ,
-      payload : data
+    type: 'DEL_DATA_ID',
+    payload: data
   }
 }
 

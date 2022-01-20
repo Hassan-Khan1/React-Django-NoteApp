@@ -1,8 +1,15 @@
 import React, { useEffect, useState, Component } from 'react'
 //  Link of Specific Note Id
 import { useHistory } from 'react-router-dom';
+
+// Actions
 import { loginToken } from '../../actions/user';
+
+// React Redux
 import { useSelector, useDispatch } from 'react-redux'
+
+// ANt Design  Login Form
+import { Form, Input, Button, Checkbox } from 'antd';
 
 const Login = () => {
 	const history = useHistory();
@@ -16,21 +23,10 @@ const Login = () => {
 			body: JSON.stringify(state)
 		})
 			.then(data => data.json())
-
 			.then(
 				data => {
-					console.log('Token....', data.token)
 					dispatch(loginToken(data.token))
 					history.push('/');
-
-					// let token = data.token ;
-					// if (token) {
-					// 	token = true
-					// 	history.push('/');
-					// }else {
-					// 	history.goBack();
-					// }
-					// this.props.userLogin(data.token);
 				}
 			)
 			.catch(error => console.error(error))
@@ -58,6 +54,7 @@ const Login = () => {
 
 	return (
 		<div className='notes-login'>
+
 			<h1 className=''>Login user form</h1>
 			<label>
 				Username:
@@ -65,7 +62,9 @@ const Login = () => {
 					value={state.username}
 					onChange={inputChanged} />
 			</label>
-			<br />
+
+			<br/>
+
 			<label>
 				Password:
 				<input type="password" name="password"
@@ -78,7 +77,13 @@ const Login = () => {
 		</div>
 	);
 }
+
 export default Login;
+
+
+
+
+
 
 // class Login extends Component {
 

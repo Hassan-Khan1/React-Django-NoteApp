@@ -17,7 +17,9 @@ class Note(models.Model):
   #   null=True)
 
   def __str__(self):
-      return self.body[0:50]
+      return str(self.body) + '---'  + str(self.updated)
+      #  return  self.userid +  "---" + self.password + "-----" + str(self.status)
+
 
 
 
