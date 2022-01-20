@@ -4,10 +4,15 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import Serializer
 from .models import Note
-from .serializers import NoteSerializer
+from .serializers import NoteSerializer ,UserSerializer
 from api import serializers
 # from .utils import updateNote, getNoteDetail, deleteNote, getNotesList, createNote
 # Create your views here.
+from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+
 
 
 @api_view(['GET'])
@@ -95,3 +100,9 @@ def deleteNote(request, pk):
   note = Note.objects.get(id=pk)
   note.delete()
   return Response('Note was deleted!')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+

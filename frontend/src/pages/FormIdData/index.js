@@ -46,7 +46,7 @@ const NotePage = ({ history }) => {
   const deleteNote = async () => {
     const res = API.delete(`/api/notes/${id}/delete/`);
     dispatch(delnote(res))
-
+    history.push('/');
     // await API.delete(`/api/notes/${id}/delete/`);
     // await API.delete('/api/notes/' + id + '/delete/');
   }
@@ -61,7 +61,7 @@ const NotePage = ({ history }) => {
       console.log("Post Request...")
       postNote();
     };
-    history.push('');
+    history.push('/');
   }
 
   console.log('data....', data?.body)
@@ -92,6 +92,7 @@ const NotePage = ({ history }) => {
       <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={ data?.body }></textarea>
       {/* <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={data?.body}></textarea> */}
       {/* <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={ data?.body} /> */}
+      {/* <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea> */}
 
     </div>
   )
