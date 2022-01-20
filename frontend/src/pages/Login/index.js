@@ -21,11 +21,11 @@ const Login = () => {
 				data => {
 					console.log('Token....', data.token)
 					dispatch(loginToken(data.token))
+					history.push('/');
 					// this.props.userLogin(data.token);
 				}
 			)
 			.catch(error => console.error(error))
-		history.push('/');
 	}
 	// http://127.0.0.1:8000/api/router/users/
 	const register = (event) => {

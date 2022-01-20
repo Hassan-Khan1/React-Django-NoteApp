@@ -6,28 +6,28 @@ const requestReducer = (state = initialState, action) => {
 
     case "GET_DATA":
       return {
-        ...initialState, notes: action.payload || []
+        ...initialState, notes: action.payload 
       }
     case "GET_DATA_ID":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, getDataId: action.payload
       }
     case "POST_DATA_ID":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, postData: action.payload
       }
     case "PUT_DATA_ID":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, putData: action.payload
       }
     case "DEL_DATA_ID":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, delData: action.payload
       }
 
     case "Login_Token":
       return {
-        ...initialState, notes: action.payload
+        ...initialState, loginToken: action.payload
       }
 
     default: return state;

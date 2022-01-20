@@ -13,16 +13,20 @@ class API {
   //   let data = await response.json();
   //   return data
   // }
-
+  
   get = async (path,token) => {
-    console.log("Api..",token)
+    console.log("Api......Api Before.",token)
     let response = await fetch(path, {
       method: "GET",
-      headers: { 'Content-Type': 'application/json' },
-      Authorization: `Token ${token}`
+      headers: { 'Authorization': `Token ${token}` },
+      // headers: { 'Content-Type': 'application/json' },
+      // Authorization: `Token ${token}`
+      
       // body: JSON.stringify(data)
     })
     let data = await response.json();
+    console.log("Api......Api After.",token)
+
     return data
   }
 

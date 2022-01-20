@@ -13,7 +13,7 @@ const { TextArea } = Input;
 const NotePage = ({ history }) => {
   const { id } = useParams();
   // const [data1, setData] = useState(null);
-  const data = useSelector(state => state.requestRe.notes)
+  const data = useSelector(state => state.requestRe.getDataId)
   // const { data } = useSelector(state => state.requestRe.find( notes.id ));
   const dispatch = useDispatch();
 
