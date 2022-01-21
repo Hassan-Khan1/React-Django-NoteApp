@@ -37,7 +37,6 @@ class API {
       body: JSON.stringify(state)
     })
     let data = await response.json();
-    console.log("Data. APi Lgin..", data)
     return data
   }
   registerApi = async (path, state) => {
@@ -47,7 +46,6 @@ class API {
       body: JSON.stringify(state)
     })
     let data = await response.json();
-    console.log("Register..Api....", data)
     return data
   }
 }
