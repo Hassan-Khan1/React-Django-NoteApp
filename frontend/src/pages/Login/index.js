@@ -2,8 +2,9 @@ import React, { useState, } from 'react'
 //  Link of Specific Note Id
 import { useHistory } from 'react-router-dom';
 
-// Actions
-import { loginToken } from '../../actions/user';
+// Users Actions
+import { loginToken } from '../../ducks/users/actions';
+
 
 // React Redux
 import { useDispatch } from 'react-redux'
@@ -23,7 +24,7 @@ const Login = () => {
 	}
 
 	const register = async (event) => {
-		await API.registerApi('/api/users/', state)
+	await API.registerApi('/api/users/', state)
 	}
 
 	const inputChanged = (event) => {

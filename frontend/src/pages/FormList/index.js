@@ -9,8 +9,8 @@ import AddButton from '../../components/AddButton'
 // Api Services
 import API from '../../services/API.js'
 
-// Actions
-import { getList } from '../../actions/index.js'
+// Note List Actions
+import { getList } from '../../ducks/notes/actions.js';
 
 const FormList = () => {
 	const history = useHistory();

@@ -53,6 +53,20 @@ def getRoutes(request):
   return Response(routes)
 
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # authentication_classes = [TokenAuthentication, ]
+    # permission_classes = [IsAuthenticated, ]
+
+
+class NoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all().order_by('-updated')
+    serializer_class = NoteSerializer
+    authentication_classes = [TokenAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+
 # /notes GET
 # /notes POST
 # /notes/<id> GET
@@ -104,22 +118,3 @@ def getRoutes(request):
 #   return Response('Note was deleted!')
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    # authentication_classes = [TokenAuthentication, ]
-    # permission_classes = [IsAuthenticated, ]
-
-
-class NoteViewSet(viewsets.ModelViewSet):
-    queryset = Note.objects.all()
-    serializer_class = NoteSerializer
-    authentication_classes = [TokenAuthentication, ]
-    permission_classes = [IsAuthenticated, ]
-
-
-# class BookViewSet(viewsets.ModelViewSet):
-#   queryset = Note.objects.all()
-#   serializer_class = NoteSerializer
-#   # authentication_classes = [TokenAuthentication, ]
-#   # permission_classes = [IsAuthenticated, ]

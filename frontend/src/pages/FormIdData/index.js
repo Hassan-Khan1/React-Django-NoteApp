@@ -8,13 +8,12 @@ import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
 //  API Services 
 import API from '../../services/API'
 
-// Redux Actions
-import { postNoteAction, putNoteAction, delNoteAction, getNoteIdAction } from '../../actions';
+// Note Id  Actions
+import { postNoteAction, putNoteAction, delNoteAction, getNoteIdAction } from '../../ducks/notes/actions';
 
 // React Redux
 import { useSelector, useDispatch } from 'react-redux'
 
-const { TextArea } = Input;
 const FormIdData = ({ history }) => {
   const { id } = useParams();
 
@@ -28,13 +27,13 @@ const FormIdData = ({ history }) => {
 
   const getNote = async () => {
     if (id === 'new') return
+    console.log("asdasdds",token)
     const res = await API.get(`/api/notes/${id}`, token)
     dispatch(getNoteIdAction(res))
   }
   const postNote = async () => {
     const res = API.post('/api/notes/', data, token);
     dispatch(postNoteAction(res))
-    // await API.post('/api/notes/create/', data);
   }
   const putNote = async () => {
     const res = API.put(`/api/notes/${id}/`, data, token);
