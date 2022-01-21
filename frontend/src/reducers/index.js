@@ -4,7 +4,8 @@ import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
   requestRe: requestReducer,
-  userReducer:userReducer
-  
+  userReducer: userReducer
+
 });
+
 export default allReducers;

@@ -18,7 +18,7 @@ function App() {
   console.log(window.location.pathname);
   return (
     <Router history={customHistory}>
-      <div className={`container dark ${window.location.pathname === '/login' ? 'login-view' : ''}`}>
+      <div className={`container dark`}>
         <div className="app">
           <Header />
           <Route exact path='/' component={FormList} />

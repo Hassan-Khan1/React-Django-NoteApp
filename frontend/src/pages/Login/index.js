@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react'
+import React, { useState, } from 'react'
 //  Link of Specific Note Id
 import { useHistory } from 'react-router-dom';
 
@@ -6,46 +6,26 @@ import { useHistory } from 'react-router-dom';
 import { loginToken } from '../../actions/user';
 
 // React Redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-// ANt Design  Login Form
-import { Form, Input, Button, Checkbox } from 'antd';
+// Api Services
+import API from '../../services/API.js'
 
 const Login = () => {
 	const history = useHistory();
 	const [state, setState] = useState({ username: '', password: '' });
 	const dispatch = useDispatch();
 
-	const login = (event) => {
-		fetch('http://127.0.0.1:8000/auth/', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(state)
-		})
-			.then(data => data.json())
-			.then(
-				data => {
-					dispatch(loginToken(data.token))
-					history.push('/');
-				}
-			)
-			.catch(error => console.error(error))
+	const login = async (event) => {
+		const res = await API.loginApi('/auth/', state)
+		dispatch(loginToken(res.token))
+		history.push('/');
 	}
-	// http://127.0.0.1:8000/api/router/users/
-	const register = (event) => {
-		fetch('http://127.0.0.1:8000/api/users/', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(state)
-		})
-			.then(data => data.json())
-			.then(
-				data => {
-					console.log(data);
-				}
-			)
-			.catch(error => console.error(error))
+
+	const register = async (event) => {
+		await API.registerApi('/api/users/', state)
 	}
+
 	const inputChanged = (event) => {
 		const cred = { ...state };
 		cred[event.target.name] = event.target.value;
@@ -54,7 +34,6 @@ const Login = () => {
 
 	return (
 		<div className='notes-login'>
-
 			<h1 className=''>Login user form</h1>
 			<label>
 				Username:
@@ -62,9 +41,7 @@ const Login = () => {
 					value={state.username}
 					onChange={inputChanged} />
 			</label>
-
-			<br/>
-
+			<br />
 			<label>
 				Password:
 				<input type="password" name="password"
@@ -80,79 +57,3 @@ const Login = () => {
 
 export default Login;
 
-
-
-
-
-
-// class Login extends Component {
-
-// 	state = {
-// 		credentials: { username: '', password: '' }
-// 	}
-
-// 	login = event => {
-// 		console.log(this.state.credentials)
-// 		fetch('http://127.0.0.1:8000/auth/', {
-// 			method: 'POST',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify(this.state.credentials)
-// 		})
-// 			.then(data => data.json())
-// 			.then(
-// 				data => {
-// 					console.log(data.token)
-
-// 					// this.props.userLogin(data.token);
-// 				}
-// 			)
-// 			.catch(error => console.error(error))
-// 	}
-// 	// http://127.0.0.1:8000/api/router/users/
-// 	register = event => {
-// 		fetch('http://127.0.0.1:8000/api/users/', {
-// 			method: 'POST',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify(this.state.credentials)
-// 		})
-// 			.then(data => data.json())
-// 			.then(
-// 				data => {
-// 					console.log(data);
-// 				}
-// 			)
-// 			.catch(error => console.error(error))
-// 	}
-// 	inputChanged = event => {
-// 		const cred = this.state.credentials;
-// 		cred[event.target.name] = event.target.value;
-// 		this.setState({ credentials: cred });
-// 	}
-
-// 	render() {
-// 		return (
-// 			<div>
-// 				<h1>Login user form</h1>
-
-// 				<label>
-// 					Username:
-// 					<input type="text" name="username"
-// 						value={this.state.credentials.username}
-// 						onChange={this.inputChanged} />
-// 				</label>
-// 				<br />
-// 				<label>
-// 					Password:
-// 					<input type="password" name="password"
-// 						value={this.state.credentials.password}
-// 						onChange={this.inputChanged} />
-// 				</label>
-// 				<br />
-// 				<button onClick={this.login}>Login</button>
-// 				<button onClick={this.register}>Register</button>
-// 			</div>
-// 		);
-// 	}
-// }
-
-// export default Login;

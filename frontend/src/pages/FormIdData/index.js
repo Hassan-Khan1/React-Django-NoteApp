@@ -72,28 +72,3 @@ const FormIdData = ({ history }) => {
   )
 };
 export default FormIdData;
-
-
-
-
-
-
-{/* <div>
-  const [data1, setData] = useState(null);
-  const {data} = useSelector(state => state.requestRe.find( notes.id ));
-  <textarea onChange={(e) => { dispatch(getnoteid((({ ...data, 'body': e.target.value })))) }} defaultValue={data?.body}></textarea>
-  <TextArea rows={4} onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body} />
-  <textarea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} defaultValue={data?.body}></textarea>
-  <Form onFinish={handleSubmit} initialValues={{ name: data?.body }} >
-    <Form.Item
-      name="name"
-      rules={[{ required: true, message: 'Please input your username!' }]} >
-      <TextArea onChange={(e) => { setData(({ ...data, 'body': e.target.value })) }} />
-    </Form.Item>
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
-</div> */}

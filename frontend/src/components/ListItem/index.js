@@ -30,4 +30,5 @@ const ListItem = ({ id, body, updated }) => {
 		</Link>
 	)
 };
+
 export default ListItem;
