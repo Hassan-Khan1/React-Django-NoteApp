@@ -424,6 +424,10 @@ header
 .header .ant-menu {
   border: 0;
   background: none !important;
+  flex: 1 1 0;
+  align-items: flex-end;
+  justify-content: flex-end;
+
 }
 
 .header .ant-menu li.ant-menu-item {

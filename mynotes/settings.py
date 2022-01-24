@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     "corsheaders",
     'djoser',
-    # 'accounts',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mynotes.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

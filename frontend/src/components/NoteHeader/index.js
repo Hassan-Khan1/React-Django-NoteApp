@@ -18,7 +18,13 @@ const NoteHeader = ({ history }) => {
 						<Link to="/login" />Login
 					</Menu.Item>
 					<Menu.Item>
-					<Link to="/register"/> Register</Menu.Item>
+						<Link to="/register" /> Register
+					</Menu.Item>
+					<Menu.Item>
+						<Link to="/logout" /> Logout
+						</Menu.Item>
+						
+
 				</Menu>
 			</div>
 		</div>

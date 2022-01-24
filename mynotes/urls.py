@@ -23,5 +23,8 @@ urlpatterns = [
 	path('api/', include('api.urls')),
     path('auth/', obtain_auth_token),
 
+   	path('accounts/', include('accounts.urls')),    #  Accounts appl Url
+
+
 	path('', TemplateView.as_view(template_name='index.html')),
 ]
