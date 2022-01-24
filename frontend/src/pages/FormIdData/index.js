@@ -27,7 +27,7 @@ const FormIdData = ({ history }) => {
 
   const getNote = async () => {
     if (id === 'new') return
-    console.log("asdasdds",token)
+    console.log("asdasdds", token)
     const res = await API.get(`/api/notes/${id}`, token)
     dispatch(getNoteIdAction(res))
   }
@@ -56,7 +56,7 @@ const FormIdData = ({ history }) => {
   }
   console.log('data....', data?.body)
   return (
-    <div className='note'>
+    <div className='note container-fluid'>
       <div className='note-header'>
         <h3><ArrowLeft onClick={handleSubmit} /></h3>
         {id !== 'new' ? (
@@ -70,4 +70,5 @@ const FormIdData = ({ history }) => {
     </div>
   )
 };
+
 export default FormIdData;

@@ -1,6 +1,6 @@
 import './App.css';
-// import Header from './components/Header';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import NoteHeader from './components/NoteHeader';
+import { Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
 // Note Specific Id Data
@@ -11,30 +11,64 @@ import FormList from './pages/FormList';
 
 // Login Page
 import Login from './pages/Login';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
+import NoteFooter from './components/NoteFooter';
+import Register from './pages/Register';
 
 const { Header, Content, Footer } = Layout;
 
-const customHistory = createBrowserHistory();
-
 function App() {
-  console.log(window.location.pathname);
+  const history = useHistory();
   return (
-
-    <Router history={customHistory}>
-      <div className={`container dark`}>
-        <div className="app">
-          <Header />
-          <Route exact path='/' component={FormList} />
-          <Route exact path='/notes/:id' component={FormIdData} />
-          <Route exact path='/login' component={Login} />
-        </div>
-      </div>
-    </Router>
-
+    <Layout className="mainLayout">
+      <Header>
+        <NoteHeader history={history} />
+      </Header>
+      <Content style={{ marginTop: '100px' }}>
+        <RouterWrap />
+        {/* <FormList /> */}
+      </Content>
+      {/* <Footer> */}
+      {/* <NoteFooter /> */}
+      {/* </Footer> */}
+    </Layout>
   );
 }
 export default App;
+
+const RouterWrap = () => {
+  const routes = [
+    {
+      exact: true,
+      path: '/',
+      component: FormList
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/notes/:id',
+      component: FormIdData
+    },
+    {
+      path: '/register',
+      component: Register
+    },
+  ];
+  return (
+    <Switch>
+      {routes.map(({ path, component, exact }, i) => (
+        <Route
+          exact={exact}
+          key={i}
+          path={path}
+          component={component}
+        />
+      ))}
+    </Switch>
+  )
+}
 
 
 {/* <Router history={customHistory}>
