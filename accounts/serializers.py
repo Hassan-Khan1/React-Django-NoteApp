@@ -8,32 +8,32 @@ from rest_framework import serializers
 
 class RegistrationSerializer(serializers.ModelSerializer):
 
-  password2 = serializers.CharField(style = { 'input_type' : 'password' },write_only = True)
+  # password2 = serializers.CharField(style = { 'input_type' : 'password' },write_only = True)
 
   class Meta:
     model = User
-    fields = ['id' ,'username', 'email' ,'password','password2']
-    extra_kwargs = {
-      'password': {'write_only': True,}
-      }
+    fields = ['id' ,'username', 'email' ,'password',]
+    # extra_kwargs = {
+    #   'password': {'write_only': True,}
+    #   }
 
-  def save(self):
-    password = self.validated_data['password']
-    password2 = self.validated_data['password2']
+  # def save(self):
+  #   password = self.validated_data['password']
+  #   password2 = self.validated_data['password2']
 
-    if password !=  password2:
-      raise serializers.ValidationError({'error': 'Pass1 and Pass2 is not matching'})
+  #   if password !=  password2:
+  #     raise serializers.ValidationError({'error': 'Pass1 and Pass2 is not matching'})
 
-    if User.objects.filter(email=self.validated_data['email']).exists():
-      raise serializers.ValidationError({'error': 'Email Already Exists'})
+  #   if User.objects.filter(email=self.validated_data['email']).exists():
+  #     raise serializers.ValidationError({'error': 'Email Already Exists'})
 
-    account = User(email=self.validated_data['email'],username = self.validated_data['username'])
-    account.set_password(password)
-    account.save()
+  #   account = User(email=self.validated_data['email'],username = self.validated_data['username'])
+  #   account.set_password(password)
+  #   account.save()
 
-    return account
+  #   return account
 
-	# def create(self, validated_data):
-	# 	user = User.objects.create_user(**validated_data)
-	# 	Token.objects.create(user=user)
-	# 	return user
+  def create(self, validated_data):
+    user = User.objects.create_user(**validated_data)
+    # Token.objects.create(user=user)
+    return user

@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 // Users Actions
 import { loginToken } from '../../ducks/users/actions';
 
-
 // React Redux
 import { useDispatch } from 'react-redux'
 
@@ -18,9 +17,9 @@ const Login = () => {
 	const dispatch = useDispatch();
 
 	const onFinish = async (state) => {
-		const res = await API.loginApi('/auth/', state)
+		const res = await API.loginApi('/accounts/login/', state)
 		if (res.token) {
-			localStorage.setItem('myData', res.token);
+			localStorage.setItem('myToken', res.token);
 			// saveTokenInLocalStroage(res.token)   // Local Stroage
 			dispatch(loginToken(res.token))
 			history.push('/');
@@ -36,10 +35,9 @@ const Login = () => {
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
 	};
-	const ls = localStorage.getItem('myData');
+	const ls = localStorage.getItem('myToken');
 	console.log("Login Before LOcal ...", ls)
 	// localStorage.clear();
-	console.log("Login After LOcal ...", ls)
 
 	return (
 		<Form

@@ -1,7 +1,7 @@
 import './App.css';
 import NoteHeader from './components/NoteHeader';
 import { Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom';
-import { createBrowserHistory } from "history";
+import { Layout } from 'antd';
 
 // Note Specific Id Data
 import FormIdData from './pages/FormIdData/index.js';
@@ -9,29 +9,37 @@ import FormIdData from './pages/FormIdData/index.js';
 // Note List Data
 import FormList from './pages/FormList';
 
-// Login Page
+// Page Component 
 import Login from './pages/Login';
-import { Layout } from 'antd';
-import NoteFooter from './components/NoteFooter';
 import Register from './pages/Register';
+import Logout from './pages/Logout';
 
-const { Header, Content, Footer } = Layout;
+// Footer Component
+import NoteFooter from './components/NoteFooter';
+
+//Layout App 
+import AppLayout from './Layout/app';
+
 
 function App() {
+
+  const { Header, Content, Footer } = Layout;
   const history = useHistory();
   return (
-    <Layout className="mainLayout">
-      <Header>
-        <NoteHeader history={history} />
-      </Header>
-      <Content style={{ marginTop: '100px' }}>
-        <RouterWrap />
-        {/* <FormList /> */}
-      </Content>
-      {/* <Footer> */}
-      {/* <NoteFooter /> */}
-      {/* </Footer> */}
-    </Layout>
+    // <Layout className="mainLayout">
+    //     <NoteHeader history={history} />
+    //   <Content style={{ marginTop: '100px' }}>
+    //     <RouterWrap />
+    //     {/* <FormList /> */}
+    //   </Content>
+    //   {/* <Footer> */}
+    //   {/* <NoteFooter /> */}
+    //   {/* </Footer> */}
+    // </Layout>
+    <div>
+      <AppLayout />
+    </div>
+
   );
 }
 export default App;
@@ -54,6 +62,10 @@ const RouterWrap = () => {
     {
       path: '/register',
       component: Register
+    },
+    {
+      path: '/logout',
+      component: Logout
     },
   ];
   return (

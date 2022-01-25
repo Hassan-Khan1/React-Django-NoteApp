@@ -15,6 +15,8 @@ import { postNoteAction, putNoteAction, delNoteAction, getNoteIdAction } from '.
 import { useSelector, useDispatch } from 'react-redux'
 
 const FormIdData = ({ history }) => {
+  const localStorageToken = localStorage.getItem('myToken');
+
   const { id } = useParams();
 
   const data = useSelector(state => state.requestRe.getDataId)
@@ -28,19 +30,19 @@ const FormIdData = ({ history }) => {
   const getNote = async () => {
     if (id === 'new') return
     console.log("asdasdds", token)
-    const res = await API.get(`/api/notes/${id}`, token)
+    const res = await API.get(`/api/notes/${id}`, localStorageToken)
     dispatch(getNoteIdAction(res))
   }
   const postNote = async () => {
-    const res = API.post('/api/notes/', data, token);
+    const res = API.post('/api/notes/', data, localStorageToken);
     dispatch(postNoteAction(res))
   }
   const putNote = async () => {
-    const res = API.put(`/api/notes/${id}/`, data, token);
+    const res = API.put(`/api/notes/${id}/`, data, localStorageToken);
     dispatch(putNoteAction(res))
   }
   const deleteNote = async () => {
-    const res = API.delete(`/api/notes/${id}/`, token);
+    const res = API.delete(`/api/notes/${id}/`, localStorageToken);
     dispatch(delNoteAction(res))
     history.push('/');
   }

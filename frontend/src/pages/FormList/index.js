@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
+import { Form, Input, Button, Modal, Radio } from 'antd';
 
 // Components
 import ListItem from '../../components/ListItem/index.js'
@@ -12,13 +13,11 @@ import API from '../../services/API.js'
 // Note List Actions
 import { getList } from '../../ducks/notes/actions.js';
 
-import { Form, Input, Button, Checkbox, Modal } from 'antd';
 
 const FormList = () => {
 
-	const LocalStorageToken = localStorage.getItem('myData');
-	// localStorage.clear()
-	// console.log("LocalStorageToken....",LocalStorageToken)
+	const localStorageToken = localStorage.getItem('myToken');
+	console.log("Form List LocalStorageToken....", localStorageToken)
 
 	const history = useHistory();
 	const notes = useSelector(state => state.requestRe.notes)
@@ -30,7 +29,7 @@ const FormList = () => {
 	}, []);
 
 	const getData = async () => {
-		if (LocalStorageToken <= null) return (
+		if (localStorageToken <= null) return (
 			Modal.warning({
 				title: 'warning',
 				content: 'Please Login First',
@@ -40,10 +39,9 @@ const FormList = () => {
 			history.push('/login') //  !token is not working
 
 		)
-		const res = await API.get('/api/notes/', LocalStorageToken);
+		const res = await API.get('/api/notes/', localStorageToken);
 		dispatch(getList(res))
 	}
-
 
 	if (notes.length === 0) return <h1>No Records Found!</h1>;
 	return (
@@ -59,8 +57,9 @@ const FormList = () => {
 							<ListItem key={index} {...note} />
 						))}
 					</div>
+					<AddButton />
 				</>
-				<AddButton />
+				{/* <AddButton /> */}
 			</div>
 		</div>
 	)
