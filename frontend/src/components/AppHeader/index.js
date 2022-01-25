@@ -1,10 +1,18 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { RESET_STORE } from '../../ducks/users/actionTypes';
+import store from '../../store';
+import { resetToken } from '../../ducks/users/actions';
 
 const { Header, Content, Footer } = Layout;
 
-const NoteHeader = ({ history }) => {
+const AppHeader = ({ history }) => {
+
+	const historypush = useHistory();
+	const dispatch = useDispatch();
 
 	const onFinish = async (state) => {
 		const localStorageToken = localStorage.getItem('myToken');
@@ -15,6 +23,10 @@ const NoteHeader = ({ history }) => {
 			//   body: JSON.stringify(state)
 		})
 		localStorage.clear()
+		historypush.push('/login');
+
+    store.dispatch(resetToken())
+
 		let data = await response.json();
 		return data
 	}
@@ -25,7 +37,7 @@ const NoteHeader = ({ history }) => {
 			<div className='container-fluid'>
 				<div className='header'>
 					<div className="logo">
-						<a href='#'>Django React</a>
+						<a href='#'>App Django React</a>
 					</div>
 					{/* <div> */}
 					<Menu mode="horizontal" defaultSelectedKeys={'1'}>
@@ -38,12 +50,12 @@ const NoteHeader = ({ history }) => {
 						<Menu.Item key="3" >
 							<Link to="/register" /> Register
 						</Menu.Item>
-						<Menu.Item key="4" >
+						{/* <Menu.Item key="4" >
 							<Link to="/logout" /> Logout
-						</Menu.Item>
+						</Menu.Item> */}
 					</Menu>
 
-					<Button type='primary' ghost onClick={onFinish} >Logout</Button>
+					{/* <Button type='primary' ghost onClick={onFinish} >Logout</Button> */}
 					{/* </div> */}
 				</div>
 			</div>
@@ -51,6 +63,6 @@ const NoteHeader = ({ history }) => {
 	)
 };
 
-export default NoteHeader;
+export default AppHeader;
 
 {/* <Menu.Item onClick={() => history.push('/login')}> */ }

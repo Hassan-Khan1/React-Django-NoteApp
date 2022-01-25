@@ -20,6 +20,8 @@ const Register = () => {
   const onFinish = async (state) => {
     const res = await API.registerApi('/accounts/register/', state)
     // const res = await API.registerApi('/api/users/', state)
+    console.log("Token...", res)
+
     dispatch(loginToken(res.token))
     Modal.success({
       // title: 'Confirm',

@@ -56,8 +56,8 @@ const FormList = () => {
 						{notes.map((note, index) => (
 							<ListItem key={index} {...note} />
 						))}
+						<AddButton />
 					</div>
-					<AddButton />
 				</>
 				{/* <AddButton /> */}
 			</div>

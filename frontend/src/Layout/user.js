@@ -10,7 +10,7 @@ import UserHeader from '../components/UserHeader';
 
 const { Content, Footer } = Layout;
 
-const AppLayout = () => {
+const UserLayout = () => {
 
   const routes = [
     {
@@ -18,27 +18,27 @@ const AppLayout = () => {
       path: '/',
       component: FormList
     },
-    {
-      path: '/login',
-      component: Login
-    },
+    // {
+    //   path: '/login',
+    //   component: Login
+    // },
     {
       path: '/notes/:id',
       component: FormIdData
     },
-    {
-      path: '/register',
-      component: Register
-    },
     // {
-    //   path: '/logout',
-    //   component: Logout
+    //   path: '/register',
+    //   component: Register
     // },
+    {
+      path: '/logout',
+      component: Logout
+    },
   ];
 
   return (
     <Layout className="mainLayout">
-      <AppHeader />
+      <UserHeader />
       <Content style={{ marginTop: '100px' }}>
         <LayoutRoutes routes={routes} />
         {/* <FormList /> */}
@@ -50,4 +50,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout;
+export default UserLayout;

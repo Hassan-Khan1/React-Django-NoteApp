@@ -1,13 +1,17 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button } from 'antd';
 import API from '../../services/API';
-const Logout = () => {
+import { useHistory } from 'react-router-dom';
 
+
+const Logout = () => {
+  const history = useHistory();
   const localStorageToken = localStorage.getItem('myToken');
 
   const onFinish = async (state) => {
     const res = API.logoutApi('/accounts/logout/', localStorageToken);
     localStorage.clear()
+    history.push('/login');
   }
   return (
     <div>
