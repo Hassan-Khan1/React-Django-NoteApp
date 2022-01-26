@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { Form, Input, Button, Modal, Radio } from 'antd';
+import {  Modal } from 'antd';
 
 // Components
 import ListItem from '../../components/ListItem/index.js'
@@ -12,7 +12,6 @@ import API from '../../services/API.js'
 
 // Note List Actions
 import { getList } from '../../ducks/notes/actions.js';
-
 
 const FormList = () => {
 
@@ -41,6 +40,7 @@ const FormList = () => {
 		const res = await API.get('/api/notes/', localStorageToken);
 		dispatch(getList(res))
 	}
+
 	if (notes.length === 0) return <h1>No Records Found!</h1>;
 	return (
 		<div className='notes'>

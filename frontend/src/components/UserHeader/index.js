@@ -59,7 +59,7 @@ const UserHeader = ({ history }) => {
             </Menu.Item> */}
           </Menu>
 
-          <Button type='primary' ghost onClick={onFinish} >Logout</Button>
+          <Button type='text' ghost onClick={onFinish} >Logout</Button>
           {/* </div> */}
         </div>
       </div>
