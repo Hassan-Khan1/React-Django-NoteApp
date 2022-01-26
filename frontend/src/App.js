@@ -24,10 +24,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
 
-  const localStorageToken = localStorage.getItem('myToken');
-  console.log("App.Js localStorageToken....", localStorageToken)
+  const localStorageToken = localStorage.getItem('myToken') ;
   const token = useSelector(state => state.userReducer.loginToken)
-  console.log("App.Js Redux..", token)
 
   return (
     <div>

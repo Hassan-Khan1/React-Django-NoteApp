@@ -10,7 +10,7 @@ const userReducer = (state = initialState, action) => {
 
     case LOGIN_TOKEN:
       return {
-        ...initialState, loginToken: action.payload
+        ...initialState, loginToken: action.payload,
       }
     case RESET_STORE:
       return  {

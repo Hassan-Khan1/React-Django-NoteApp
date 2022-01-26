@@ -29,7 +29,6 @@ const FormIdData = ({ history }) => {
 
   const getNote = async () => {
     if (id === 'new') return
-    console.log("asdasdds", token)
     const res = await API.get(`/api/notes/${id}`, localStorageToken)
     dispatch(getNoteIdAction(res))
   }

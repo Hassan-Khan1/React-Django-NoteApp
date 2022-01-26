@@ -17,7 +17,6 @@ import { getList } from '../../ducks/notes/actions.js';
 const FormList = () => {
 
 	const localStorageToken = localStorage.getItem('myToken');
-	console.log("Form List LocalStorageToken....", localStorageToken)
 
 	const history = useHistory();
 	const notes = useSelector(state => state.requestRe.notes)
@@ -42,7 +41,6 @@ const FormList = () => {
 		const res = await API.get('/api/notes/', localStorageToken);
 		dispatch(getList(res))
 	}
-
 	if (notes.length === 0) return <h1>No Records Found!</h1>;
 	return (
 		<div className='notes'>
