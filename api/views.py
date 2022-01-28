@@ -1,4 +1,4 @@
-from django.http import response
+from django.http import request, response
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -59,10 +59,22 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     # authentication_classes = [TokenAuthentication, ]
     # permission_classes = [IsAuthenticated, ]
+    # def get_object(self):
+    #     pk = self.kwargs.get('pk')
+
+    #     if pk == "current":
+    #         return self.request.user
+
+    #     return super(UserViewSet, self).get_object()
 
 
 class NoteViewSet(viewsets.ModelViewSet):
+  
     queryset = Note.objects.all().order_by('-updated')
+    # print('Dataa ....',queryset)
+    # useree = request.user
+    # print('Useree ....',useree)
+
     serializer_class = NoteSerializer
     authentication_classes = [TokenAuthentication, ]
     permission_classes = [IsAuthenticated, ]

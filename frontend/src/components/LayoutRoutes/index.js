@@ -1,5 +1,4 @@
 import { react } from "react";
-import Register from "../../pages/Register";
 import { Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom';
 
 
@@ -17,5 +16,4 @@ const LayoutRoutes = ({ routes }) => {
     </Switch>
   )
 }
-
 export default LayoutRoutes;
